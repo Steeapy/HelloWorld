@@ -43,10 +43,10 @@ test: ##@development Executes the Unit Test suite
 	vendor/bin/phpunit test
 
 watch: ##@other Executes the build step, if a php file in the src/ directory is changed
-	ls src/*.php | entr make build
+	find src/ | entr make build
 
 watch-tests: ##@other Executes the build step, if a php file in the test/ directory is changed
-	ls test/*.php | entr make build
+	find test/ | entr make build
 
 run: ##@development Runs the server
 	php -S localhost:8000 -t public/
