@@ -48,5 +48,5 @@ watch: ##@other Executes the build step, if a php file in the src/ directory is 
 watch-tests: ##@other Executes the build step, if a php file in the test/ directory is changed
 	ls test/*.php | entr make build
 
-run: ##@ Runs the project
-	php src/helloworld.php
+run: ##@development Runs the server
+	php -S localhost:8000 -t public/

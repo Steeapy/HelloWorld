@@ -1,2 +1,5 @@
 /vendor/
 git rm --cached .DS_Store
+.idea/
+.php-cs-fixer.cache
+.phpactor.json

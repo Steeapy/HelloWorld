@@ -1,5 +1,7 @@
 # Usage
-Run the project with:
+
+Run the server with:
+
 ```
 make run
 ```
