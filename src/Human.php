@@ -1,28 +1,45 @@
 <?php
+
 declare (strict_types=1);
 
 namespace HelloWorld;
 
 class Human
 {
-	public function sayHello(string $name): void
-	{
-	   $this->say("Hallo, ich bin $name");
-	}
+    /**
+    * @var string[]
+    */
+    private array $professions;
 
-	public function sayAge(int $age): void
-	{
-	    $this->say("Ich bin $age Jahre alt\n");
-	}
+    public function addProfession(string $profession): void
+    {
+        $this->professions[] = $profession;
+    }
 
-	public function sayProfession(string $profession): void
-	{
-	    $this->say("Ich arbeite als $profession\n");
-	}
+    public function sayAllProfessions(): void
+    {
+        foreach ($this->professions as $profession) {
+            echo $profession;
+        }
+    }
 
-	private function say(string $sentence): void
-	{
-		echo $sentence;
-	}
+    public function sayHello(string $name): void
+    {
+        $this->say("Hallo, ich bin $name");
+    }
+
+    public function sayAge(int $age): void
+    {
+        $this->say("Ich bin $age Jahre alt");
+    }
+
+    public function sayProfession(string $profession): void
+    {
+        $this->say("Ich arbeite als $profession");
+    }
+
+    private function say(string $sentence): void
+    {
+        echo $sentence . "\n";
+    }
 }
-
