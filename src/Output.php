@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace HelloWorld;
+namespace HelloWorld\Model;
 
 function say(string $stuff): void
 {

@@ -5,7 +5,7 @@ declare (strict_types=1);
  */
 require 'vendor/autoload.php';
 
-use HelloWorld\Human;
+use HelloWorld\Model\Human;
 
 $human = new Human();
 

@@ -50,3 +50,6 @@ watch-tests: ##@other Executes the build step, if a php file in the test/ direct
 
 run: ##@development Runs the server
 	php -S localhost:8000 -t public/
+
+setup: ##@development setups the Project
+	composer install
