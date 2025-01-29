@@ -1,10 +1,11 @@
 <?php
 
-
 declare (strict_types=1);
 
 chdir(dirname(__DIR__));
+
 require 'vendor/autoload.php';
+require_once 'config/config.php';
 
 use HelloWorld\Controller\IndexController;
 
