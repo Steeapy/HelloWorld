@@ -3,17 +3,17 @@
 declare (strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use HelloWorld\Model\Human;
+use HelloWorld\Model\Player;
 
-class HumanTest extends TestCase
+class PlayerTest extends TestCase
 {
     /**
      * @dataProvider providePossibleCharacters
      */
     public function testCanCreateCharacter (string $name, int $age, string $characterClass): void
     {
-        $human = new Human($characterClass, $age, $name);
-        $this->assertInstanceOf(Human::class, $human);
+        $player = new Player($characterClass, $age, $name);
+        $this->assertInstanceOf(Player::class, $player);
     }
     public static function providePossibleCharacters (): array
     {

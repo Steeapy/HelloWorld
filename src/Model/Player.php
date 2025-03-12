@@ -4,7 +4,7 @@ declare (strict_types=1);
 
 namespace HelloWorld\Model;
 
-class Human
+class Player
 {
     private string $characterClass;
     private int $age;

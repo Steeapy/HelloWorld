@@ -26,9 +26,9 @@ switch ($request) {
         break;
 }
 
-/*use HelloWorld\Human;
+/*use HelloWorld\Player;
 
-$human = new Human();
+$human = new Player();
 
 $human->addProfession('ITler');
 $human->addProfession('BarKeeper');

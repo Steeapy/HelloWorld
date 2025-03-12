@@ -5,9 +5,9 @@ declare (strict_types=1);
  */
 require 'vendor/autoload.php';
 
-use HelloWorld\Model\Human;
+use HelloWorld\Model\Player;
 
-$human = new Human();
+$human = new Player();
 
 $human->addProfession('ITler');
 $human->addProfession('BarKeeper');
