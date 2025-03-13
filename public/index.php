@@ -17,8 +17,9 @@ switch ($request) {
         $indexController->indexAction();
         break;
 
-    case '/test':
-        echo 'test';
+    case '/show':
+        $indexController = new IndexController();
+        $indexController->showAction();
         break;
 
     default:

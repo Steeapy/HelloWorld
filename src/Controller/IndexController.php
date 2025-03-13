@@ -12,9 +12,12 @@ class IndexController
 {
     public function indexAction(): void
     {
-        $human = new Player('Barbarian', 69, 'Hugo');
-        $content = $human->getName();
+        $characterView = new View('index/characterForm');
         $indexView = new View('index/index');
-        echo $indexView->render(['content' => $content]);
+        echo $indexView->render(['content' => $characterView->render()]);
+    }
+    public function showAction(): void
+    {
+        var_dump($_POST);
     }
 }
