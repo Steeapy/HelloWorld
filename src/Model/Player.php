@@ -12,6 +12,9 @@ class Player
 
     public function __construct(string $characterClass, int $age, string $name)
     {
+        $this->assertAge($age);
+        $this->assertName($name);
+
         $this->characterClass = $characterClass;
         $this->age = $age;
         $this->name = $name;
@@ -32,4 +35,21 @@ class Player
         return $this->characterClass;
     }
 
+    private function assertAge(int $age)
+    {
+        if ($age <= 0){
+            throw new InvalidArgumentException(
+                "Age is <= 0!"
+            );
+        }
+    }
+
+    private function assertName(string $name)
+    {
+        if (empty($name)){
+            throw new InvalidArgumentException(
+                'Name is empty'
+            );
+        }
+    }
 }
