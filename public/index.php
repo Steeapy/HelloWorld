@@ -26,13 +26,3 @@ switch ($request) {
         echo '404';
         break;
 }
-
-/*use HelloWorld\Player;
-
-$human = new Player();
-
-$human->addProfession('ITler');
-$human->addProfession('BarKeeper');
-
-$human->sayAllProfessions();
-*/

@@ -4,7 +4,7 @@ declare (strict_types=1);
 
 namespace HelloWorld\Model;
 
-use http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 
 class Player
 {

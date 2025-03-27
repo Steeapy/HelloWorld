@@ -2,6 +2,7 @@
 
 declare (strict_types=1);
 
+use HelloWorld\Model\CharacterClass;
 use PHPUnit\Framework\TestCase;
 use HelloWorld\Model\Player;
 
@@ -12,18 +13,18 @@ class PlayerTest extends TestCase
      */
     public function testCanCreateCharacter (string $name, int $age, string $characterClass): void
     {
-        $player = new Player($characterClass, $age, $name);
+        $player = new Player(new CharacterClass($characterClass), $age, $name);
         $this->assertInstanceOf(Player::class, $player);
     }
     public static function providePossibleCharacters (): array
     {
         return [
-            'a mighty babarian' => [
+            'a mighty barbarian' => [
                 'Conan the Barbarian',
                 30,
                 'BARBARIAN',
             ],
-            'a powerfull warrior' => [
+            'a powerful warrior' => [
                 'Minsc of Rashemen',
                 140,
                 'WARRIOR',

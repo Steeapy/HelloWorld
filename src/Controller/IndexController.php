@@ -5,10 +5,9 @@ declare (strict_types=1);
 
 namespace HelloWorld\Controller;
 
+use HelloWorld\Model\CharacterClass;
 use HelloWorld\Model\Player;
 use HelloWorld\Service\View;
-use http\Exception\InvalidArgumentException;
-use mysql_xdevapi\Exception;
 
 class IndexController
 {
@@ -23,9 +22,10 @@ class IndexController
         var_dump($_POST);
 
         $player = new Player(
-            $_POST['characterClass'],
-            $_POST['age'],
+            new CharacterClass($_POST['character_radio']),
+            (int)$_POST['age'],
             $_POST['name']
         );
+        echo "Ich bin {$player->getCharacterClass()->getValue()}";
     }
 }

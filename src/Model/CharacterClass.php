@@ -2,17 +2,19 @@
 
 namespace HelloWorld\Model;
 
-use http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 
 class CharacterClass
 {
     public const BARBARIAN = 'BARBARIAN';
     public const WARRIOR = 'WARRIOR';
     public const ARCHER = 'ARCHER';
+    public const WIZARD = 'WIZARD';
     public const CHARACTER_CLASSES = [
         self::BARBARIAN => 'Barbarian',
         self::WARRIOR => 'Warrior',
         self::ARCHER => 'Archer',
+        self::WIZARD => 'Wizard',
     ];
     private string $value;
     public function __construct(string $characterClass)

@@ -1,3 +1,6 @@
+<?php
+    use HelloWorld\Model\CharacterClass;
+?>
 <form action="/show" method="POST">
     <fieldset>
         <legend>Create a Character</legend>
@@ -13,7 +16,10 @@
         </div>
         <div>
             <label for="characterClass"><span>Class</span>
-                <input name="characterClass" placeholder="Class" required type="text">
+                <?php foreach (CharacterClass::CHARACTER_CLASSES as $id => $name):?>
+                    <input type="radio" id="<?= $id ?>" name="character_radio" value="<?= $id ?>">
+                    <label for="<?= $id ?>"><?= $name ?></label>
+                <?php endforeach ?>
             </label>
         </div>
         <div>
