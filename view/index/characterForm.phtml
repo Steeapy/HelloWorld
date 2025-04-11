@@ -1,29 +1,27 @@
 <?php
     use HelloWorld\Model\CharacterClass;
 ?>
-<form action="/show" method="POST">
+<form action="/show" method="POST" id="character">
     <fieldset>
         <legend>Create a Character</legend>
+        <div class="character">
+            <?php foreach (CharacterClass::CHARACTER_CLASSES as $id => $name):?>
+                <input type="radio" id="<?= $id ?>" name="character_radio" class="characterClass" value="<?= $id ?>">
+                <label for="<?= $id ?>"><span><?= $name ?></span></label>
+            <?php endforeach ?>
+        </div>
         <div>
             <label for="name"><span>Name</span>
-                <input name="name" placeholder="Name" required autofocus type="text">
+                <input name="name" placeholder="Name" required autofocus type="text" class="styled">
             </label>
         </div>
         <div>
             <label for="age"><span>Age</span>
-                <input name="age" placeholder="Age" required type="number">
+                <input name="age" placeholder="Age" required type="number" class="styled">
             </label>
         </div>
         <div>
-            <label for="characterClass"><span>Class</span>
-                <?php foreach (CharacterClass::CHARACTER_CLASSES as $id => $name):?>
-                    <input type="radio" id="<?= $id ?>" name="character_radio" value="<?= $id ?>">
-                    <label for="<?= $id ?>"><?= $name ?></label>
-                <?php endforeach ?>
-            </label>
-        </div>
-        <div>
-            <input type="submit" value="Create">
+            <input type="submit" value="Create" class="styledSubmit">
         </div>
     </fieldset>
 </form>
