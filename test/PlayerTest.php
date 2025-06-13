@@ -11,7 +11,7 @@ class PlayerTest extends TestCase
     /**
      * @dataProvider providePossibleCharacters
      */
-    public function testCanCreateCharacter (string $name, int $age, string $characterClass): void
+    public function testCanCreateCharacter(string $name, int $age, string $characterClass): void
     {
         $characterMock = $this->createMock(CharacterClass::class);
         $characterMock->method("getValue")->willReturn(CharacterClass::BARBARIAN);
@@ -19,7 +19,23 @@ class PlayerTest extends TestCase
         $this->assertInstanceOf(Player::class, $player);
         var_dump($player->getCharacterClass()->getValue());
     }
-    public static function providePossibleCharacters (): array
+
+    public function testCanChangeState(): void
+    {
+        $characterMock = $this->createMock(CharacterClass::class);
+        $characterMock->method("getValue")->willReturn(CharacterClass::BARBARIAN);
+        $player = new Player($characterMock, 245, 'Heinrich');
+
+        $player->handleInput();
+        $player->handleInput('run');
+        $player->handleInput();
+        $player->handleInput();
+        $player->handleInput();
+        $player->handleInput();
+        $player->handleInput();
+    }
+
+    public static function providePossibleCharacters(): array
     {
         return [
             'a mighty barbarian' => [
