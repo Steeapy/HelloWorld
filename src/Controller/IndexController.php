@@ -26,6 +26,12 @@ class IndexController
             (int)$_POST['age'],
             $_POST['name']
         );
-        echo "Ich bin {$player->getCharacterClass()->getValue()}";
+        $characterMenu = new View('index/characterMenu');
+        $indexView = new View('index/index');
+        echo $indexView->render([
+            'content' => $characterMenu->render([
+                'player' => $player
+            ])
+        ]);
     }
 }
