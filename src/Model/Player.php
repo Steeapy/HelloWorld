@@ -44,7 +44,7 @@ class Player
 
     public function handleInput(string $input = ''): void
     {
-        $state = $this->state->handleInput($this, $input);
+        $state = $this->state->handleInput($input);
 
         if (!empty($state)) {
             $this->state = $state;

@@ -6,7 +6,7 @@ use HelloWorld\Model\Player;
 
 class InitialState implements State
 {
-    public function handleInput(Player $player, string $input = ''): ?State
+    public function handleInput(string $input = ''): ?State
     {
         echo "initializing\n";
 

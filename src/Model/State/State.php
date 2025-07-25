@@ -6,5 +6,5 @@ use HelloWorld\Model\Player;
 
 interface State
 {
-    public function handleInput(Player $player, string $input = ''): ?State;
+    public function handleInput(string $input = ''): ?State;
 }

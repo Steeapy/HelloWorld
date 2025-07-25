@@ -14,7 +14,7 @@ class RunState implements State
         $this->miles = 0;
     }
 
-    public function handleInput(Player $player, string $input = ''): ?State
+    public function handleInput(string $input = ''): ?State
     {
         echo "running {$this->miles}" . PHP_EOL;
         $this->miles++;
