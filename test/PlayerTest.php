@@ -3,6 +3,7 @@
 declare (strict_types=1);
 
 use HelloWorld\Model\CharacterClass;
+use HelloWorld\Model\RunState;
 use PHPUnit\Framework\TestCase;
 use HelloWorld\Model\Player;
 
@@ -38,5 +39,19 @@ class PlayerTest extends TestCase
                 'ARCHER',
             ],
         ];
+    }
+
+    public function testCanChangeState(): void
+    {
+        $characterMock = $this->createMock(CharacterClass::class);
+        $characterMock->method("getValue")->willReturn(CharacterClass::BARBARIAN);
+
+        $player = new Player($characterMock, 12, 'Mark');
+        $player->handleInput('run');
+        $player->update();
+
+        $result = $player->getState(); # new IdelState | IdelState
+
+        $this->assertInstanceOf(RunState::class, $result); #"RunState"
     }
 }

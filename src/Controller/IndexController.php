@@ -19,8 +19,6 @@ class IndexController
     }
     public function showAction(): void
     {
-        var_dump($_POST);
-
         $player = new Player(
             new CharacterClass($_POST['character_radio']),
             (int)$_POST['age'],

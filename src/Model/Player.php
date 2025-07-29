@@ -8,11 +8,12 @@ use InvalidArgumentException;
 
 class Player
 {
+    private StateInterface $state;
     private CharacterClass $characterClass;
     private int $age;
     private string $name;
 
-    public function __construct(CharacterClass $characterClass, int $age, string $name)
+    public function __construct(CharacterClass $characterClass, int $age, string $name, StateInterface $state = new IdleState())
     {
         $this->assertAge($age);
         $this->assertName($name);
@@ -20,20 +21,47 @@ class Player
         $this->characterClass = $characterClass;
         $this->age = $age;
         $this->name = $name;
+        $this->state = $state;
+    }
+
+    public function handleInput(string $input): void
+    {
+        $actualState = $this->state->handleInput($input);
+        if ($actualState !== null) {
+            $this->state = $actualState;
+        }
+    }
+
+    public function getState(): StateInterface
+    {
+        return $this->state;
+    }
+
+    public function update()
+    {
+        switch ($this->state) {
+            case 'idle':
+                echo 'idle';
+                break;
+
+            case 'run':
+                echo 'run';
+                break;
+        }
     }
 
     private function assertAge(int $age)
     {
-        if ($age <= 0){
+        if ($age <= 0) {
             throw new InvalidArgumentException(
-                "Age is <= 0!"
+                'Age is <= 0!'
             );
         }
     }
 
     private function assertName(string $name)
     {
-        if (empty($name)){
+        if (empty($name)) {
             throw new InvalidArgumentException(
                 'Name is empty'
             );

@@ -1,4 +1,5 @@
 <?php
+
 declare (strict_types=1);
 
 namespace HelloWorld\Service;
@@ -18,13 +19,13 @@ class View
     }
     public function render(?array $data = null): string
     {
-        if($data !== null) {
+        if ($data !== null) {
             extract($data);
         }
 
         ob_start();
-            require_once $this->template;
-            $content = ob_get_contents();
+        require_once $this->template;
+        $content = ob_get_contents();
         ob_end_clean();
 
         return $content;
