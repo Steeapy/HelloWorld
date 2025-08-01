@@ -8,11 +8,13 @@ namespace HelloWorld\Controller;
 use HelloWorld\Model\CharacterClass;
 use HelloWorld\Model\Player;
 use HelloWorld\Service\View;
+use HelloWorld\Adapter\PostgreAdapter;
 
 class IndexController
 {
     public function indexAction(): void
     {
+        PostgreAdapter::getPlayerData();
         $characterView = new View('index/characterForm');
         $indexView = new View('index/index');
         echo $indexView->render(['content' => $characterView->render()]);

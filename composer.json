@@ -22,5 +22,8 @@
     "analyze": "php vendor/bin/phpstan analyze -l 9 src test",
     "lint-dry": "php vendor/bin/php-cs-fixer fix --dry-run --diff src",
     "lint": "php vendor/bin/php-cs-fixer fix --diff src"
+  },
+  "require": {
+    "ext-pdo": "*"
   }
 }
