@@ -14,6 +14,16 @@ class IndexController
 {
     public function indexAction(): void
     {
+        if (empty($_POST)) {
+            $player = new Player(
+                new CharacterClass($_POST['character_radio']),
+                (int)$_POST['age'],
+                $_POST['name']
+            );
+            var_dump($player);
+            exit;
+        }
+
         PostgreAdapter::getPlayerData();
         $characterView = new View('index/characterForm');
         $indexView = new View('index/index');
@@ -23,11 +33,7 @@ class IndexController
     {
         var_dump($_POST);
 
-        $player = new Player(
-            new CharacterClass($_POST['character_radio']),
-            (int)$_POST['age'],
-            $_POST['name']
-        );
+
         $characterMenu = new View('index/characterMenu');
         $indexView = new View('index/index');
         echo $indexView->render([

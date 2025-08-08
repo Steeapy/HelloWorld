@@ -13,6 +13,6 @@ class PostgreAdapter
         $pdo = new PDO($dsn, POSTGRES_USER, POSTGRES_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
         $statement = $pdo->prepare('SELECT * FROM player WHERE player_id = :playerID;');
         $statement->execute(['playerID' => 1]);
-        var_dump($statement->fetch());
+        //var_dump($statement->fetch());
     }
 }
