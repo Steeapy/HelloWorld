@@ -7,19 +7,24 @@ chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 require_once 'config/config.php';
 
+use HelloWorld\Adapter\PostgreAdapter;
 use HelloWorld\Controller\IndexController;
 
-$request = $_SERVER["REQUEST_URI"];
+$request = trim(strtok($_SERVER['REQUEST_URI'], '?'));
+$postgreAdapter = new PostgreAdapter();
+$indexController = new IndexController($postgreAdapter);
 
 switch ($request) {
     case '/':
-        $indexController = new IndexController();
         $indexController->indexAction();
         break;
 
     case '/show':
-        $indexController = new IndexController();
         $indexController->showAction();
+        break;
+
+    case '/error':
+        $indexController->errorAction();
         break;
 
     default:
