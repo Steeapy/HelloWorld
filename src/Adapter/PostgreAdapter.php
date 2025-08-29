@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace HelloWorld\Adapter;
 
 use HelloWorld\Model\Player;
+use HelloWorld\Repository\DatabaseAdapter;
 use PDO;
 
-class PostgreAdapter
+class PostgreAdapter implements DatabaseAdapter
 {
 
     private $connection;
@@ -17,34 +18,21 @@ class PostgreAdapter
         $this->connection = new PDO($dsn, POSTGRES_USER, POSTGRES_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     }
 
-    public function getPlayerData(int $playerId): array
+    public function read(string $sql, array $data = []): array
     {
-        $statement = $this->connection->prepare('SELECT * FROM player WHERE player_id = :playerID;');
-        $statement->execute(['playerID' => $playerId]);
+        $statement = $this->connection->prepare($sql);
+        $statement->execute($data);
 
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function createPlayerData(Player $player): int
+    public function writeAndReturnLastInsertedId(string $sql, array $data): string
     {
-        $statement = $this->connection->prepare('INSERT INTO player(player_character_class, player_name, player_age, player_created) VALUES (:playerCharacterClass, :playerName, :playerAge, :playerCreated);');
-        $result = $statement->execute([
-            "playerCharacterClass" => $player->getCharacterClass()->getValue(),
-            "playerName" => $player->getName(),
-            "playerAge" => $player->getAge(),
-            "playerCreated" => "2025-12-01 12:03:02"
-        ]);
+        // TODO: Implement writeAndReturnLastInsertedId() method.
+    }
 
-        if ($result === false) {
-            throw new \RuntimeException("Es konnte nicht in der Datenbank eingetragen werden.");
-        }
-
-        $lastId = $this->connection->lastInsertId();
-
-        if ($lastId === false) {
-            throw new \RuntimeException("Es konnte keine Id zurück gegeben werden");
-        }
-
-        return (int)$lastId;
+    public function writeAndReturnAffectedRowCount(string $sql, array $data): int
+    {
+        // TODO: Implement writeAndReturnAffectedRowCount() method.
     }
 }

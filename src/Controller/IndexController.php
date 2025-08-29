@@ -8,15 +8,15 @@ namespace HelloWorld\Controller;
 use HelloWorld\Model\CharacterClass;
 use HelloWorld\Model\Player;
 use HelloWorld\Service\View;
-use HelloWorld\Adapter\PostgreAdapter;
+use HelloWorld\Repository\PlayerRepository;
 
 class IndexController
 {
-    private $postgreAdapter;
+    private $playerAdapter;
 
-    public function __construct(PostgreAdapter $postgreAdapter)
+    public function __construct(PlayerRepository $playerAdapter)
     {
-        $this->postgreAdapter = $postgreAdapter;
+        $this->playerAdapter = $playerAdapter;
     }
 
     public function errorAction(): void
@@ -38,7 +38,7 @@ class IndexController
             );
 
             try {
-                $playerId = $this->postgreAdapter->createPlayerData($player);
+                $playerId = $this->playerAdapter->createPlayerData($player);
             } catch (\RuntimeException $e) {
                 $this->redirect('/error');
             }
@@ -54,7 +54,7 @@ class IndexController
     public function showAction(): void
     {
         $playerId = $_GET["playerId"];
-        $playerData = $this->postgreAdapter->getPlayerData((int)$playerId);
+        $playerData = $this->playerAdapter->getPlayerData((int)$playerId);
         var_dump($playerData);
 
         exit;

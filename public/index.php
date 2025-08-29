@@ -7,12 +7,14 @@ chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 require_once 'config/config.php';
 
+use HelloWorld\Repository\PlayerRepository;
 use HelloWorld\Adapter\PostgreAdapter;
 use HelloWorld\Controller\IndexController;
 
 $request = trim(strtok($_SERVER['REQUEST_URI'], '?'));
-$postgreAdapter = new PostgreAdapter();
-$indexController = new IndexController($postgreAdapter);
+$dataBase = new PostgreAdapter();
+$playerRepository = new PlayerRepository($dataBase);
+$indexController = new IndexController($playerRepository);
 
 switch ($request) {
     case '/':
