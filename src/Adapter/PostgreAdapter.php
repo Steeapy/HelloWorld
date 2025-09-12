@@ -18,6 +18,7 @@ class PostgreAdapter implements DatabaseAdapter
         $this->connection = new PDO($dsn, POSTGRES_USER, POSTGRES_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     }
 
+
     public function read(string $sql, array $data = []): array
     {
         $statement = $this->connection->prepare($sql);
@@ -28,11 +29,38 @@ class PostgreAdapter implements DatabaseAdapter
 
     public function writeAndReturnLastInsertedId(string $sql, array $data): string
     {
-        // TODO: Implement writeAndReturnLastInsertedId() method.
+        $this->execution($sql, $data);
+
+        $lastId = $this->connection->lastInsertId();
+
+        if ($lastId === false) {
+            throw new \RuntimeException("Es konnte keine Id zurück gegeben werden");
+        }
+
+        return $lastId;
     }
 
     public function writeAndReturnAffectedRowCount(string $sql, array $data): int
     {
-        // TODO: Implement writeAndReturnAffectedRowCount() method.
+        $statement = $this->execution($sql, $data);
+
+        return $statement->rowCount();
+    }
+
+    private function execution($sql, $data): \PDOStatement
+    {
+        $statement = $this->connection->prepare($sql);
+
+        if ($statement === false){
+            throw new \RuntimeException("Das prepare statement funktioniert nicht");
+        }
+
+        $result = $statement->execute($data);
+
+        if ($result === false) {
+            throw new \RuntimeException("Es konnte nicht in der Datenbank eingetragen werden.");
+        }
+
+        return $statement;
     }
 }

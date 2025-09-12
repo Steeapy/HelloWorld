@@ -21,24 +21,17 @@ class PlayerRepository
 
     public function createPlayerData(Player $player): int
     {
-        $statement = $this->connection->prepare('INSERT INTO player(player_character_class, player_name, player_age, player_created) VALUES (:playerCharacterClass, :playerName, :playerAge, :playerCreated);');
-        $result = $statement->execute([
+        $sql = 'INSERT INTO player(player_character_class, player_name, player_age, player_created) VALUES (:playerCharacterClass, :playerName, :playerAge, :playerCreated);';
+
+        $playerInformation = [
             "playerCharacterClass" => $player->getCharacterClass()->getValue(),
             "playerName" => $player->getName(),
             "playerAge" => $player->getAge(),
             "playerCreated" => "2025-12-01 12:03:02"
-        ]);
+        ];
 
-        if ($result === false) {
-            throw new \RuntimeException("Es konnte nicht in der Datenbank eingetragen werden.");
-        }
+        $playerId = $this->databaseAdapter->writeAndReturnLastInsertedId($sql, $playerInformation);
 
-        $lastId = $this->connection->lastInsertId();
-
-        if ($lastId === false) {
-            throw new \RuntimeException("Es konnte keine Id zurück gegeben werden");
-        }
-
-        return (int)$lastId;
+        return (int)$playerId;
     }
 }
