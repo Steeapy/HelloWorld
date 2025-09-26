@@ -14,12 +14,17 @@ class PlayerRepository
         $this->databaseAdapter = $databaseAdapter;
     }
 
-    public function getPlayerData(int $playerId): array
+    public function fetchPlayer(int $playerId): array
     {
         return $this->databaseAdapter->read('SELECT * FROM player WHERE player_id = :playerID;', ['playerID' => $playerId]);
     }
 
-    public function createPlayerData(Player $player): int
+    public function fetchAllPlayers(): array
+    {
+        return $this->databaseAdapter->read('SELECT * FROM player;');
+    }
+
+    public function createPlayer(Player $player): int
     {
         $sql = 'INSERT INTO player(player_character_class, player_name, player_age, player_created) VALUES (:playerCharacterClass, :playerName, :playerAge, :playerCreated);';
 

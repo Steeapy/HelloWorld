@@ -38,7 +38,7 @@ class IndexController
             );
 
             try {
-                $playerId = $this->playerAdapter->createPlayerData($player);
+                $playerId = $this->playerAdapter->createPlayer($player);
             } catch (\RuntimeException $e) {
                 $this->redirect('/error');
             }
@@ -54,7 +54,8 @@ class IndexController
     public function showAction(): void
     {
         $playerId = $_GET["playerId"];
-        $playerData = $this->playerAdapter->getPlayerData((int)$playerId);
+        $playerData = $this->playerAdapter->fetchPlayer((int)$playerId);
+        #$playerData = $this->playerAdapter->fetchAllPlayers();
         var_dump($playerData);
 
         exit;
