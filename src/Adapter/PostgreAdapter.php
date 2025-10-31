@@ -24,9 +24,7 @@ final class PostgreAdapter implements DatabaseAdapter
         $statement = $this->connection->prepare($sql);
         $statement->execute($data);
 
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        return array_shift($result);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function writeAndReturnLastInsertedId(string $sql, array $data): string

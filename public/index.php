@@ -21,12 +21,20 @@ switch ($request) {
         $indexController->indexAction();
         break;
 
+    case '/create':
+        $indexController->createAction();
+        break;
+
     case '/show':
         $indexController->showAction();
         break;
 
     case '/error':
         $indexController->errorAction();
+        break;
+
+    case '/delete':
+        $indexController->deleteAction();
         break;
 
     default:

@@ -19,6 +19,19 @@ class IndexController
         $this->playerAdapter = $playerAdapter;
     }
 
+    public function indexAction(): void
+    {
+        $allPlayers = $this->playerAdapter->fetchAllPlayers();
+
+        $playerLists = new View('index/playerLists');
+        $indexView = new View('index/index');
+        echo $indexView->render([
+            'content' => $playerLists->render([
+                'players' => $allPlayers
+            ])
+        ]);
+    }
+
     public function errorAction(): void
     {
         $errorPage = new View('index/error');
@@ -28,7 +41,7 @@ class IndexController
             ])
         ]);
     }
-    public function indexAction(): void
+    public function createAction(): void
     {
         if (!empty($_POST)) {
             $player = new Player(
@@ -47,10 +60,11 @@ class IndexController
         }
 
         $characterView = new View('index/characterForm');
-        $indexView = new View('index/index');
+        $createView = new View('index/index');
 
-        echo $indexView->render(['content' => $characterView->render()]);
+        echo $createView->render(['content' => $characterView->render()]);
     }
+
     public function showAction(): void
     {
         $playerId = $_GET["playerId"];
@@ -67,6 +81,13 @@ class IndexController
                 'player' => $player
             ])
         ]);
+    }
+    public function deleteAction(): void
+    {
+        $playerId = (int)$_GET['playerId'];
+        $this->playerAdapter->deletePlayerById($playerId);
+
+        $this->redirect("/");
     }
 
     private function redirect(string $location): void

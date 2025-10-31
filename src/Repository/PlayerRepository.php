@@ -17,7 +17,9 @@ class PlayerRepository
 
     public function fetchPlayer(int $playerId): Player
     {
-        $fetchedPlayer = $this->databaseAdapter->read('SELECT * FROM player WHERE player_id = :playerID;', ['playerID' => $playerId]);
+        $result = $this->databaseAdapter->read('SELECT * FROM player WHERE player_id = :playerID;', ['playerID' => $playerId]);
+
+        $fetchedPlayer = array_shift($result);
 
         return new Player(
             new CharacterClass($fetchedPlayer['player_character_class']),
@@ -28,7 +30,18 @@ class PlayerRepository
 
     public function fetchAllPlayers(): array
     {
-        return $this->databaseAdapter->read('SELECT * FROM player;');
+        $playerObjects = [];
+        $players = $this->databaseAdapter->read('SELECT * FROM player;');
+
+        foreach ($players as $player){
+            $playerObjects[] = new Player(
+                new CharacterClass($player['player_character_class']),
+                $player['player_age'],
+                $player['player_name']
+            );
+        }
+
+        return $playerObjects;
     }
 
     public function createPlayer(Player $player): int
