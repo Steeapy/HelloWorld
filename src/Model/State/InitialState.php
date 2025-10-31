@@ -10,8 +10,7 @@ class InitialState implements State
     {
         echo "initializing\n";
 
-        if ($input == 'run')
-        {
+        if ($input == 'run') {
             return new RunState();
         }
 

@@ -53,7 +53,7 @@ class Player
 
     private function assertAge(int $age)
     {
-        if ($age <= 0){
+        if ($age <= 0) {
             throw new InvalidArgumentException(
                 "Age is <= 0!"
             );
@@ -62,7 +62,7 @@ class Player
 
     private function assertName(string $name)
     {
-        if (empty($name)){
+        if (empty($name)) {
             throw new InvalidArgumentException(
                 'Name is empty'
             );
