@@ -3,6 +3,7 @@
 namespace HelloWorld\Repository;
 
 use HelloWorld\Adapter\PostgreAdapter;
+use HelloWorld\Model\CharacterClass;
 use HelloWorld\Model\Player;
 
 class PlayerRepository
@@ -14,9 +15,15 @@ class PlayerRepository
         $this->databaseAdapter = $databaseAdapter;
     }
 
-    public function fetchPlayer(int $playerId): array
+    public function fetchPlayer(int $playerId): Player
     {
-        return $this->databaseAdapter->read('SELECT * FROM player WHERE player_id = :playerID;', ['playerID' => $playerId]);
+        $fetchedPlayer = $this->databaseAdapter->read('SELECT * FROM player WHERE player_id = :playerID;', ['playerID' => $playerId]);
+
+        return new Player(
+            new CharacterClass($fetchedPlayer['player_character_class']),
+            $fetchedPlayer['player_age'],
+            $fetchedPlayer['player_name']
+        );
     }
 
     public function fetchAllPlayers(): array
@@ -38,5 +45,10 @@ class PlayerRepository
         $playerId = $this->databaseAdapter->writeAndReturnLastInsertedId($sql, $playerInformation);
 
         return (int)$playerId;
+    }
+
+    public function deletePlayerById(int $playerId): int
+    {
+        return $this->databaseAdapter->writeAndReturnAffectedRowCount('DELETE FROM player WHERE player_id = :playerID;', ['playerID' => $playerId]);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace HelloWorld\Adapter;
@@ -7,9 +8,8 @@ use HelloWorld\Model\Player;
 use HelloWorld\Repository\DatabaseAdapter;
 use PDO;
 
-class PostgreAdapter implements DatabaseAdapter
+final class PostgreAdapter implements DatabaseAdapter
 {
-
     private $connection;
 
     public function __construct()
@@ -53,7 +53,7 @@ class PostgreAdapter implements DatabaseAdapter
     {
         $statement = $this->connection->prepare($sql);
 
-        if ($statement === false){
+        if ($statement === false) {
             throw new \RuntimeException("Das prepare statement funktioniert nicht");
         }
 
