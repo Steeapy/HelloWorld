@@ -20,7 +20,8 @@ use HelloWorld\Model\Player;
 </head>
 <body>
     <?php foreach ($players as $player):?>
-        <p><?= $player->getName()?></p>
+        <p><?= $player->getName()?> <?= $player->getAge();?>
+        </p>
     <?php endforeach?>
 </body>
 </html>

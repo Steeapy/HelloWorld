@@ -5,6 +5,7 @@ namespace HelloWorld\Repository;
 use HelloWorld\Adapter\PostgreAdapter;
 use HelloWorld\Model\CharacterClass;
 use HelloWorld\Model\Player;
+use HelloWorld\Model\Players;
 
 class PlayerRepository
 {
@@ -28,7 +29,7 @@ class PlayerRepository
         );
     }
 
-    public function fetchAllPlayers(): array
+    public function fetchAllPlayers(): Players
     {
         $playerObjects = [];
         $players = $this->databaseAdapter->read('SELECT * FROM player;');
@@ -41,7 +42,7 @@ class PlayerRepository
             );
         }
 
-        return $playerObjects;
+        return new Players(...$playerObjects);
     }
 
     public function createPlayer(Player $player): int
