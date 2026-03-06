@@ -1,7 +1,7 @@
 <?php
     use HelloWorld\Model\CharacterClass;
 ?>
-<form action="/" method="POST" id="character">
+<form action="/create" method="POST" id="character">
     <fieldset>
         <legend>Create a Character</legend>
         <div class="character">
@@ -21,7 +21,7 @@
             </label>
         </div>
         <div>
-            <input type="submit" value="Create" class="styledSubmit">
+            <input name="submit" type="submit" value="Create" class="styledSubmit">
         </div>
     </fieldset>
 </form>
