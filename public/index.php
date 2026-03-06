@@ -37,6 +37,10 @@ switch ($request) {
         $indexController->deleteAction();
         break;
 
+    case '/update':
+        $indexController->updateAction();
+        break;
+
     default:
         echo '404';
         break;

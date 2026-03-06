@@ -42,6 +42,9 @@ lint: ##@development Executes the linter
 test: ##@development Executes the Unit Test suite
 	vendor/bin/phpunit test
 
+frontend-test:
+	vendor/bin/codecept run --steps --debug
+
 watch: ##@other Executes the build step, if a php file in the src/ directory is changed
 	find src/ | entr make build
 

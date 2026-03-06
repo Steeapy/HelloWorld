@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS player;
+
 CREATE TABLE player (
     player_id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     player_character_class varchar NOT NULL,

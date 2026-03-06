@@ -1,8 +1,8 @@
 <?php
 
-declare (strict_types=1);
-/*namespace HelloWorld;
- */
+declare(strict_types=1);
+
+// namespace HelloWorld;
 require 'vendor/autoload.php';
 
 use HelloWorld\Model\Player;
@@ -15,12 +15,11 @@ $human->addProfession('BarKeeper');
 $human->sayAllProfessions();
 
 $name = readline('name: ');
-if ($name !== false) {
+if (false !== $name) {
     $human->sayHello($name);
 }
 
-
-$age = (int)readline('age: ');
+$age = (int) readline('age: ');
 $human->sayAge($age);
 
 /*$profession = readline('profession: ');

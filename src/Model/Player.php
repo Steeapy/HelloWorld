@@ -1,12 +1,11 @@
 <?php
 
-declare (strict_types=1);
+declare(strict_types=1);
 
 namespace HelloWorld\Model;
 
 use HelloWorld\Model\State\InitialState;
 use HelloWorld\Model\State\State;
-use InvalidArgumentException;
 
 class Player
 {
@@ -14,8 +13,9 @@ class Player
     private CharacterClass $characterClass;
     private int $age;
     private string $name;
+    private ?int $id;
 
-    public function __construct(CharacterClass $characterClass, int $age, string $name, State $state = new InitialState())
+    public function __construct(CharacterClass $characterClass, int $age, string $name, ?int $id = null, State $state = new InitialState())
     {
         $this->assertAge($age);
         $this->assertName($name);
@@ -25,6 +25,13 @@ class Player
         $this->name = $name;
 
         $this->state = $state;
+
+        $this->id = $id;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getAge(): int
@@ -54,8 +61,8 @@ class Player
     private function assertAge(int $age)
     {
         if ($age <= 0) {
-            throw new InvalidArgumentException(
-                "Age is <= 0!"
+            throw new \InvalidArgumentException(
+                'Age is <= 0!'
             );
         }
     }
@@ -63,10 +70,9 @@ class Player
     private function assertName(string $name)
     {
         if (empty($name)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Name is empty'
             );
         }
     }
-
 }

@@ -1,14 +1,13 @@
 <?php
 
-
-declare (strict_types=1);
+declare(strict_types=1);
 
 namespace HelloWorld\Controller;
 
 use HelloWorld\Model\CharacterClass;
 use HelloWorld\Model\Player;
-use HelloWorld\Service\View;
 use HelloWorld\Repository\PlayerRepository;
+use HelloWorld\Service\View;
 
 class IndexController
 {
@@ -27,26 +26,27 @@ class IndexController
         $indexView = new View('index/index');
         echo $indexView->render([
             'content' => $playerLists->render([
-                'players' => $allPlayers
-            ])
+                'players' => $allPlayers,
+            ]),
         ]);
     }
 
     public function errorAction(): void
     {
         $errorPage = new View('index/error');
-        $indexView = new View("index/index");
+        $indexView = new View('index/index');
         echo $indexView->render(['content' => $errorPage->render([
-            'error' => "Test"
-            ])
+            'error' => 'Test',
+        ]),
         ]);
     }
+
     public function createAction(): void
     {
         if (!empty($_POST)) {
             $player = new Player(
                 new CharacterClass($_POST['character_radio']),
-                (int)$_POST['age'],
+                (int) $_POST['age'],
                 $_POST['name']
             );
 
@@ -56,43 +56,77 @@ class IndexController
                 $this->redirect('/error');
             }
 
-            $this->redirect("/show?playerId=$playerId");
+            $this->redirect("/show?playerId={$playerId}");
         }
 
-        $characterView = new View('index/characterForm');
+        $characterView = new View('index/create');
         $createView = new View('index/index');
 
         echo $createView->render(['content' => $characterView->render()]);
     }
 
+    public function updateAction(): void
+    {
+        $playerId = (int) $_GET['playerId'];
+
+        if (!empty($_POST)) {
+            $player = new Player(
+                new CharacterClass($_POST['character_radio']),
+                (int) $_POST['age'],
+                $_POST['name'],
+                $playerId
+            );
+
+            try {
+                $this->playerAdapter->updatePlayer($player);
+            } catch (\RuntimeException $e) {
+                $this->redirect('/error');
+            }
+
+            $this->redirect('/');
+        }
+
+        $characterView = new View('index/updatePlayer');
+        $createView = new View('index/index');
+
+        echo $createView->render(
+            [
+                'content' => $characterView->render(
+                    [
+                        'player' => $this->playerAdapter->fetchPlayer($playerId),
+                    ]
+                ),
+            ]
+        );
+    }
+
     public function showAction(): void
     {
-        $playerId = $_GET["playerId"];
-        $playerData = $this->playerAdapter->fetchPlayer((int)$playerId);
-        #$playerData = $this->playerAdapter->fetchAllPlayers();
-        var_dump($playerData);
+        $playerId = $_GET['playerId'];
+        $playerData = $this->playerAdapter->fetchPlayer((int) $playerId);
 
-        exit;
-
-        $characterMenu = new View('index/characterMenu');
+        $characterMenu = new View('index/show');
         $indexView = new View('index/index');
         echo $indexView->render([
             'content' => $characterMenu->render([
-                'player' => $player
-            ])
+                'playerName' => $playerData->getName(),
+                'playerAge' => $playerData->getAge(),
+            ]),
         ]);
     }
+
     public function deleteAction(): void
     {
-        $playerId = (int)$_GET['playerId'];
+        $playerId = (int) $_GET['playerId'];
         $this->playerAdapter->deletePlayerById($playerId);
 
-        $this->redirect("/");
+        $this->redirect('/');
     }
 
     private function redirect(string $location): void
     {
-        header('Location: ' . $location);
+        header('Location: '.$location);
+
         exit;
     }
 }

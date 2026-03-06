@@ -2,12 +2,9 @@
 
 namespace HelloWorld\Model\State;
 
-use HelloWorld\Model\Player;
-
 class RunState implements State
 {
     private int $miles;
-
 
     public function __construct()
     {
@@ -16,8 +13,8 @@ class RunState implements State
 
     public function handleInput(string $input = ''): ?State
     {
-        echo "running {$this->miles}" . PHP_EOL;
-        $this->miles++;
+        echo "running {$this->miles}".PHP_EOL;
+        ++$this->miles;
 
         return null;
     }

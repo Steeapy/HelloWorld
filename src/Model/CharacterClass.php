@@ -2,8 +2,6 @@
 
 namespace HelloWorld\Model;
 
-use InvalidArgumentException;
-
 class CharacterClass
 {
     public const BARBARIAN = 'BARBARIAN';
@@ -15,6 +13,7 @@ class CharacterClass
         self::ARCHER => 'Archer',
     ];
     private string $value;
+
     public function __construct(string $characterClass)
     {
         $this->assertCharacterClass($characterClass);
@@ -25,11 +24,11 @@ class CharacterClass
     {
         return $this->value;
     }
+
     private function assertCharacterClass(string $characterClass)
     {
         if (!array_key_exists($characterClass, self::CHARACTER_CLASSES)) {
-            throw new InvalidArgumentException("Character class '{$characterClass}' does not exist.");
+            throw new \InvalidArgumentException("Character class '{$characterClass}' does not exist.");
         }
     }
-
 }

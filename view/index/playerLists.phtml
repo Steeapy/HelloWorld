@@ -9,19 +9,20 @@ use HelloWorld\Model\Player;
  * @var Player $player
  */
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+
+<header>
+    <h1>Home</h1>
+    <a href="/create" class="btn">Create</a>
+</header>
+<ul>
     <?php foreach ($players as $player):?>
-        <p><?= $player->getName()?> <?= $player->getAge();?>
-        </p>
+        <li class="NameBox">
+            <p>Name: <?= $player->getName()?></p>
+            <p>CharacterClass: <?= $player->getCharacterClass()->getValue() ?></p>
+            <p>Alter: <?= $player->getAge();?></p>
+            <a href="/show?playerId=<?= $player->getId() ?>" class="btn">Play</a>
+            <a href="/delete?playerId=<?= $player->getId() ?>" class="btn">Delete</a>
+            <a href="/update?playerId=<?= $player->getId() ?>" class="btn">Update</a>
+        </li>
     <?php endforeach?>
-</body>
-</html>
+</ul>
