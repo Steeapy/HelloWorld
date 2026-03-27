@@ -44,7 +44,7 @@ final class PostgreAdapter implements DatabaseAdapter
         return $statement->rowCount();
     }
 
-    private function execution($sql, $data): \PDOStatement
+    private function execution(string $sql, array $data): \PDOStatement
     {
         $statement = $this->connection->prepare($sql);
 

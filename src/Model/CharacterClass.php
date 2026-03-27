@@ -25,7 +25,7 @@ class CharacterClass
         return $this->value;
     }
 
-    private function assertCharacterClass(string $characterClass)
+    private function assertCharacterClass(string $characterClass): void
     {
         if (!array_key_exists($characterClass, self::CHARACTER_CLASSES)) {
             throw new \InvalidArgumentException("Character class '{$characterClass}' does not exist.");

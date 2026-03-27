@@ -31,7 +31,7 @@ help: ##@other Show this help
 build: test analyse lint ##@development Executes different build tools: static codeanalysis, Linting and unit tests
 
 analyse: ##@development Executes the static code analyser
-	vendor/bin/phpstan analyse -l 9 src test
+	vendor/bin/phpstan analyse -c phpstan.neon
 
 lint-dry: ##@development Executes the linter without fixing any errors
 	vendor/bin/php-cs-fixer fix --dry-run --diff src

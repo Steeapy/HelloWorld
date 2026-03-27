@@ -52,11 +52,10 @@ class IndexController
 
             try {
                 $playerId = $this->playerAdapter->createPlayer($player);
+                $this->redirect("/show?playerId={$playerId}");
             } catch (\RuntimeException $e) {
                 $this->redirect('/error');
             }
-
-            $this->redirect("/show?playerId={$playerId}");
         }
 
         $characterView = new View('index/create');

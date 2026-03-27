@@ -16,6 +16,10 @@ class RunState implements State
         echo "running {$this->miles}".PHP_EOL;
         ++$this->miles;
 
+        if ($input === 'stop') {
+            return new IdleState();
+        }
+
         return null;
     }
 }

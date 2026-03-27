@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace HelloWorld\Model;
 
-class Players implements \IteratorAggregate
-{
-    public array $values;
+use ArrayIterator;
+use IteratorAggregate;
 
+/**
+ * @extends GenericCollection<Player>
+ */
+class Players extends GenericCollection
+{
     public function __construct(Player ...$players)
     {
         $this->values = $players;
-    }
-
-    public function getIterator(): \ArrayIterator
-    {
-        return new \ArrayIterator($this->values);
     }
 }

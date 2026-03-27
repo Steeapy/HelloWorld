@@ -18,7 +18,7 @@ class View
         }
     }
 
-    public function render(?array $data = null): string
+    public function render(?array $data = null): string|false
     {
         if (null !== $data) {
             extract($data);

@@ -11,6 +11,9 @@ class InitialState implements State
         if ('run' == $input) {
             return new RunState();
         }
+        if('stop' === $input) {
+            return new IdleState();
+        }
 
         return null;
     }

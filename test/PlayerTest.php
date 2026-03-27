@@ -28,11 +28,13 @@ class PlayerTest extends TestCase
 
         $player->handleInput();
         $player->handleInput('run');
+        $player->handleInput('stop');
         $player->handleInput();
+        $player->handleInput('run');
+        $player->handleInput('stop');
         $player->handleInput();
-        $player->handleInput();
-        $player->handleInput();
-        $player->handleInput();
+
+        echo $player->getState()::class;
     }
 
     public static function providePossibleCharacters(): array

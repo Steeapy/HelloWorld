@@ -49,6 +49,10 @@ class Player
         return $this->characterClass;
     }
 
+    public function getState(): State {
+        return $this->state;
+    }
+
     public function handleInput(string $input = ''): void
     {
         $state = $this->state->handleInput($input);
@@ -58,7 +62,7 @@ class Player
         }
     }
 
-    private function assertAge(int $age)
+    private function assertAge(int $age): void
     {
         if ($age <= 0) {
             throw new \InvalidArgumentException(
@@ -67,7 +71,7 @@ class Player
         }
     }
 
-    private function assertName(string $name)
+    private function assertName(string $name): void
     {
         if (empty($name)) {
             throw new \InvalidArgumentException(
