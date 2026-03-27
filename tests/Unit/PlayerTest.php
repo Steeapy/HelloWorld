@@ -2,9 +2,11 @@
 
 declare (strict_types=1);
 
+namespace Unit;
+
 use HelloWorld\Model\CharacterClass;
-use PHPUnit\Framework\TestCase;
 use HelloWorld\Model\Player;
+use PHPUnit\Framework\TestCase;
 
 class PlayerTest extends TestCase
 {
@@ -15,7 +17,9 @@ class PlayerTest extends TestCase
     {
         $characterMock = $this->createMock(CharacterClass::class);
         $characterMock->method("getValue")->willReturn(CharacterClass::BARBARIAN);
+
         $player = new Player($characterMock, $age, $name);
+
         $this->assertInstanceOf(Player::class, $player);
         var_dump($player->getCharacterClass()->getValue());
     }

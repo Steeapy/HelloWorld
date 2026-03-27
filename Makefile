@@ -40,7 +40,7 @@ lint: ##@development Executes the linter
 	vendor/bin/php-cs-fixer fix --diff src
 
 test: ##@development Executes the Unit Test suite
-	vendor/bin/phpunit test
+	vendor/bin/codecept run Unit
 
 frontend-test:
 	vendor/bin/codecept run --steps --debug

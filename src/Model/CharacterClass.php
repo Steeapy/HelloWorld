@@ -7,6 +7,7 @@ class CharacterClass
     public const BARBARIAN = 'BARBARIAN';
     public const WARRIOR = 'WARRIOR';
     public const ARCHER = 'ARCHER';
+
     public const CHARACTER_CLASSES = [
         self::BARBARIAN => 'Barbarian',
         self::WARRIOR => 'Warrior',

@@ -1,18 +1,22 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+declare(strict_types=1);
+
+namespace Unit;
+
+use Codeception\Attribute\DataProvider;
+use Codeception\Test\Unit;
 use HelloWorld\Model\CharacterClass;
 
-class CharacterClassTest extends TestCase
+class CharacterClassTest extends Unit
 {
-    /**
-     * @dataProvider providePossibleClasses
-     */
+    #[DataProvider('providePossibleClasses')]
     public function testCanCreateCharacterClass(string $class): void
     {
         $characterClass = new CharacterClass($class);
         $this->assertInstanceOf(CharacterClass::class, $characterClass);
     }
+
     public static function providePossibleClasses(): array
     {
         return [
