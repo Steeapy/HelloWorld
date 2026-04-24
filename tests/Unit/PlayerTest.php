@@ -6,9 +6,12 @@ namespace Unit;
 
 use HelloWorld\Model\CharacterClass;
 use HelloWorld\Model\Player;
-use PHPUnit\Framework\TestCase;
+use HelloWorld\Model\State\IdleState;
+use HelloWorld\Model\State\RunState;
+use Codeception\Test\Unit;
+use Tests\Support\UnitTester;
 
-class PlayerTest extends TestCase
+class PlayerTest extends Unit
 {
     /**
      * @dataProvider providePossibleCharacters
@@ -30,15 +33,11 @@ class PlayerTest extends TestCase
         $characterMock->method("getValue")->willReturn(CharacterClass::BARBARIAN);
         $player = new Player($characterMock, 245, 'Heinrich');
 
-        $player->handleInput();
         $player->handleInput('run');
-        $player->handleInput('stop');
-        $player->handleInput();
-        $player->handleInput('run');
-        $player->handleInput('stop');
-        $player->handleInput();
+        $this->assertInstanceOf(RunState::class, $player->getState());
 
-        echo $player->getState()::class;
+        $player->handleInput('stop');
+        $this->assertInstanceOf(IdleState::class, $player->getState());
     }
 
     public static function providePossibleCharacters(): array
