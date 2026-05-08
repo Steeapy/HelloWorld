@@ -9,7 +9,7 @@ use HelloWorld\Model\Player;
 use HelloWorld\Repository\PlayerRepository;
 use HelloWorld\Service\View;
 
-class IndexController
+class PlayerController
 {
     private $playerAdapter;
 

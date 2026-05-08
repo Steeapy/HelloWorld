@@ -9,12 +9,12 @@ require_once 'config/config.php';
 
 use HelloWorld\Repository\PlayerRepository;
 use HelloWorld\Adapter\PostgreAdapter;
-use HelloWorld\Controller\IndexController;
+use HelloWorld\Controller\PlayerController;
 
 $request = trim(strtok($_SERVER['REQUEST_URI'], '?'));
 $dataBase = new PostgreAdapter();
 $playerRepository = new PlayerRepository($dataBase);
-$indexController = new IndexController($playerRepository);
+$indexController = new PlayerController($playerRepository);
 
 switch ($request) {
     case '/':
